@@ -1116,7 +1116,12 @@
 
             let html = '<div class="space-y-6">';
             data.forEach((p, index) => {
-                const cleanedInsight = (p.insight || '').replace(/\\n/g, '\n');
+                // --- 修正箇所---
+                // 1. const を let に変更し、元の改行コードを変換
+                let cleanedInsight = (p.insight || '').replace(/\\n/g, '\n');
+                // 2. 「。」のあとに改行を追加する処理を追加
+                cleanedInsight = cleanedInsight.replace(/。/g, '。\n');
+
                 const cleanedCoreMessage = (p.coreMessage || '').replace(/\\n/g, '\n');
                 
                 html += `
